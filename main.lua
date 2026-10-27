@@ -13,12 +13,24 @@ function love.load()
     -- Set the window title
     love.window.setTitle("Sandbox")
     love.window.setMode(800, 600) -- Window width and height
+    love.graphics.setBackgroundColor(0.4, 0.6, 0.9)
+end
+
+-- Draws the game state to the screen
+function love.draw()
+    -- Draw the floor line
+    love.graphics.setColor(0.2, 0.7, 0.2) -- Green
+    love.graphics.rectangle("fill", 0, 320, 800, 280)
+
+    -- Draw the player
+    love.graphics.setColor(1, 1, 1) -- White
+    love.graphics.rectangle("fill", player.x, player.y, 20, 20)
 end
 
 -- Updates the game state
 -- This function runs inside the loop, 60 times a second.
 -- "dt" stands for Delta Time (the exact fraction of a second since the last frame)
-function UpdateGame(dt)
+function love.updategame(dt)
     -- Rule 1: Apply Gravity if the player is in the air
     if player.y < 300 then
         player.velocityY = player.velocityY + (player.gravity * dt)
@@ -34,7 +46,7 @@ function UpdateGame(dt)
 end
 
 -- Rule 4: The Input Method
-function HandleKeyPress(key)
+function love.keypressed(key)
     if key == "space" and not player.isJumping then
         player.velocityY = -300 -- Negative Y moves UP in screen coordinates
         player.isJumping = true
