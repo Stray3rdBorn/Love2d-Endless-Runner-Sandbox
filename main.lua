@@ -4,8 +4,8 @@ local player = {
     y = 300,
     velocityY = 0,
     isJumping = false,
-    speed = 200,  -- Pixels per second
-    gravity = 500 -- Pull force downward
+    speed = 200,   -- Pixels per second
+    gravity = 1000 -- Pull force downward
 }
 
 -- Runs once when game starts
@@ -45,10 +45,14 @@ function love.updategame(dt)
     player.y = player.y + (player.velocityY * dt)
 end
 
--- Rule 4: The Input Method
+-- Rule 4: The Input Handler
 function love.keypressed(key)
-    if key == "space" and not player.isJumping then
-        player.velocityY = -300 -- Negative Y moves UP in screen coordinates
-        player.isJumping = true
+    if key == "space" then
+        print("Spacebar was pressed successfully!")
+
+        if not player.isJumping then
+            player.velocityY = -500 -- Launch upward
+            player.isJumping = true
+        end
     end
 end
