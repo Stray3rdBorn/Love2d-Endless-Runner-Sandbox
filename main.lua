@@ -60,6 +60,11 @@ function love.update(dt)
     -- Update the enemy's position based on their velocityX
     enemy.velocityX = enemy.speed
     enemy.x = enemy.x - (enemy.velocityX * dt)
+
+    -- If the enemy completely leaves the left side of the screen (width is 25)
+    if enemy.x < -25 then
+        enemy.x = 800 -- Teleport back to the right edge
+    end
 end
 
 -- Rule 4: The Input Handler
