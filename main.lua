@@ -1,13 +1,20 @@
 -- (State) define the player object with properties for position, velocity, and state
 local player = {
     x = 100,
-    y = 300,
+    y = 290,
     velocityY = 0,
     isJumping = false,
     speed = 200,   -- Pixels per second
-    gravity = 1000 -- Pull force downward
+    gravity = 1200 -- Pull force downward
 }
 
+-- (State) define the player object with properties for position, velocity, and state
+local enemy = {
+    x = 700,
+    y = 290,
+    velocityX = 0,
+    speed = 100, -- Pixels per second
+}
 -- Runs once when game starts
 function love.load()
     -- Set the window title
@@ -23,8 +30,12 @@ function love.draw()
     love.graphics.rectangle("fill", 0, 320, 800, 280)
 
     -- Draw the player
-    love.graphics.setColor(1, 0, 0) -- Red
-    love.graphics.rectangle("fill", player.x, player.y, 20, 20)
+    love.graphics.setColor(1, 0, 0)                             -- Red
+    love.graphics.rectangle("fill", player.x, player.y, 25, 30) -- Player is a 25x30 rectangle
+
+    -- Draw the enemy
+    love.graphics.setColor(0, 0, 1)                           -- Blue
+    love.graphics.rectangle("fill", enemy.x, enemy.y, 25, 30) -- Enemy is a 25x30 rectangle
 end
 
 -- Updates the game state
@@ -40,8 +51,8 @@ function love.update(dt)
     player.y = player.y + (player.velocityY * dt)
 
     -- Check if the player has landed on the ground
-    if player.y >= 300 then
-        player.y = 300
+    if player.y >= 290 then
+        player.y = 290
         player.velocityY = 0
         player.isJumping = false
     end
