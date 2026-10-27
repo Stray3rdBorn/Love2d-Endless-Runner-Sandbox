@@ -1,5 +1,5 @@
-local gameState = "startscreen"        -- Initial game state
-local smallFont, mediumFont, largeFont -- Declare font variables
+local gameState = "startscreen"                    -- Initial game state
+local smallFont, mediumFont, largeFont, xlargeFont -- Declare font variables
 
 -- Define the player object with properties for position, velocity, and state
 local player = {
@@ -27,7 +27,8 @@ function love.load()
     -- Load fonts for different text sizes
     smallFont  = love.graphics.newFont(12)
     mediumFont = love.graphics.newFont(24)
-    largeFont  = love.graphics.newFont(48)
+    largeFont  = love.graphics.newFont(36)
+    xlargeFont = love.graphics.newFont(48)
 end
 
 -- Draws the game states to the screen
@@ -35,7 +36,7 @@ function love.draw()
     -- Draw the start screen
     if gameState == "startscreen" then
         love.graphics.clear(0, 0, 0)
-        love.graphics.setFont(largeFont)
+        love.graphics.setFont(xlargeFont)
         love.graphics.setColor(0, 1, 0) -- Green Text
         love.graphics.printf("Press ENTER to Start", 0, 250, 800, "center")
         return
