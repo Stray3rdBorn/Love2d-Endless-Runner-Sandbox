@@ -7,7 +7,7 @@ local player = {
     velocityY = 0,
     isJumping = false,
     speed = 200,   -- Pixels per second
-    gravity = 1200 -- Pull force downward
+    gravity = 1100 -- Pull force downward
 }
 
 -- Define the enemy object with properties for position, velocity, and state
@@ -67,7 +67,7 @@ function love.update(dt)
     enemy.velocityX = enemy.speed
     enemy.x = enemy.x - (enemy.velocityX * dt)
 
-    -- If the enemy completely leaves the left side of the screen (width is 25)
+    -- If the enemy completely leaves the left side of the screen
     if enemy.x < -25 then
         enemy.x = 800 -- Teleport back to the right edge
     end
@@ -85,7 +85,7 @@ function love.keypressed(key)
         end
 =======
     if key == "space" and not player.isJumping then
-        player.velocityY = -500     -- Launch upward
+        player.velocityY = -500 -- Launch upward
         player.isJumping = true
 >>>>>>> b9cc0cd (Add gradual enemy speed increase)
     end
