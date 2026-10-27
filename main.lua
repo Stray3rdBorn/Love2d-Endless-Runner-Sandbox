@@ -23,7 +23,6 @@ local enemy = {
 function love.load()
     love.window.setTitle("Endless Jumper Sandbox")
     love.window.setMode(800, 600) -- Window width and height
-    love.graphics.setBackgroundColor(0.4, 0.6, 0.9)
 
     -- Load fonts for different text sizes
     smallFont  = love.graphics.newFont(12)
@@ -35,14 +34,18 @@ end
 function love.draw()
     -- Draw the start screen
     if gameState == "startscreen" then
+        love.graphics.clear(0, 0, 0)
         love.graphics.setFont(largeFont)
         love.graphics.setColor(0, 1, 0) -- Green Text
         love.graphics.printf("Press ENTER to Start", 0, 250, 800, "center")
         return
+    elseif gameState == "play" or gameState == "gameover" then
+        -- Set the upper portion of the screen to sky blue during gameplay
+        love.graphics.clear(0.4, 0.6, 0.7)
     end
 
     -- Draw the floor line
-    love.graphics.setColor(0.2, 0.7, 0.2) -- Green
+    love.graphics.setColor(0.2, 0.8, 0.2) -- Green
     love.graphics.rectangle("fill", 0, 320, 800, 280)
 
     -- Draw the player
