@@ -10,10 +10,10 @@ local player = {
 
 -- (State) define the player object with properties for position, velocity, and state
 local enemy = {
-    x = 700,
+    x = 800,
     y = 290,
     velocityX = 0,
-    speed = 100, -- Pixels per second
+    speed = 200, -- Pixels per second
 }
 -- Runs once when game starts
 function love.load()
@@ -56,6 +56,10 @@ function love.update(dt)
         player.velocityY = 0
         player.isJumping = false
     end
+
+    -- Update the enemy's position based on their velocityX
+    enemy.velocityX = enemy.speed
+    enemy.x = enemy.x - (enemy.velocityX * dt)
 end
 
 -- Rule 4: The Input Handler
