@@ -1,23 +1,24 @@
--- 1. THE DATA (State)
+-- (State) define the player object with properties for position, velocity, and state
 local player = {
     x = 100,
     y = 300,
     velocityY = 0,
     isJumping = false,
-    speed = 200,     -- Pixels per second
-    gravity = 1200   -- Increased gravity slightly for a crisper fall
+    speed = 200,  -- Pixels per second
+    gravity = 500 -- Pull force downward
 }
 
--- 2. THE ENGINE COUPLING (LÖVE Callbacks)
-
--- This runs ONCE at the start of the game
+-- Runs once when game starts
 function love.load()
-    -- Sets a nice background color (Light Blue) so you know it's working
-    love.graphics.setBackgroundColor(0.4, 0.6, 0.9)
+    -- Set the window title
+    love.window.setTitle("Sandbox")
+    love.window.setMode(800, 600) -- Window width and height
 end
 
--- This runs 60+ times a second to handle mechanics
-function love.update(dt)
+-- Updates the game state
+-- This function runs inside the loop, 60 times a second.
+-- "dt" stands for Delta Time (the exact fraction of a second since the last frame)
+function UpdateGame(dt)
     -- Rule 1: Apply Gravity if the player is in the air
     if player.y < 300 then
         player.velocityY = player.velocityY + (player.gravity * dt)
@@ -32,21 +33,10 @@ function love.update(dt)
     player.y = player.y + (player.velocityY * dt)
 end
 
--- This runs constantly to DRAW images/shapes on your screen
-function love.draw()
-    -- Draw the floor line
-    love.graphics.setColor(0.2, 0.7, 0.2) -- Green
-    love.graphics.rectangle("fill", 0, 320, 800, 280)
-
-    -- Draw the player (represented by a white square)
-    love.graphics.setColor(1, 1, 1) -- White
-    love.graphics.rectangle("fill", player.x, player.y, 20, 20)
-end
-
--- This handles input native to LÖVE
-function love.keypressed(key)
+-- Rule 4: The Input Method
+function HandleKeyPress(key)
     if key == "space" and not player.isJumping then
-        player.velocityY = -450 -- Jump force
+        player.velocityY = -300 -- Negative Y moves UP in screen coordinates
         player.isJumping = true
     end
 end
