@@ -1,4 +1,5 @@
-local gameState = "gameover"
+local gameState = "startscreen"        -- Initial game state
+local smallFont, mediumFont, largeFont -- Declare font variables
 
 -- Define the player object with properties for position, velocity, and state
 local player = {
@@ -17,16 +18,29 @@ local enemy = {
     velocityX = 0,
     speed = 200, -- Pixels per second
 }
+
 -- Runs once when game starts
 function love.load()
-    -- Set the window title
-    love.window.setTitle("Sandbox")
+    love.window.setTitle("Endless Jumper Sandbox")
     love.window.setMode(800, 600) -- Window width and height
     love.graphics.setBackgroundColor(0.4, 0.6, 0.9)
+
+    -- Load fonts for different text sizes
+    smallFont  = love.graphics.newFont(12)
+    mediumFont = love.graphics.newFont(24)
+    largeFont  = love.graphics.newFont(48)
 end
 
--- Draws the game state to the screen
+-- Draws the game states to the screen
 function love.draw()
+    -- Draw the start screen
+    if gameState == "startscreen" then
+        love.graphics.setFont(largeFont)
+        love.graphics.setColor(0, 1, 0) -- Green Text
+        love.graphics.printf("Press ENTER to Start", 0, 250, 800, "center")
+        return
+    end
+
     -- Draw the floor line
     love.graphics.setColor(0.2, 0.7, 0.2) -- Green
     love.graphics.rectangle("fill", 0, 320, 800, 280)
@@ -44,8 +58,10 @@ end
 -- This function runs inside the loop, 60 times a second.
 -- "dt" stands for Delta Time (the exact fraction of a second since the last frame)
 function love.update(dt)
-    -- Stop updating positions if the game is over
-    --if gameState == "gameover" then return end
+    -- If the game is over or on the start screen, don't update the game logic
+    if gameState == "gameover" or gameState == "startscreen" then
+        return
+    end
 
     -- Apply gravity to the player if they are in the air
     if player.isJumping then
@@ -75,8 +91,14 @@ end
 
 -- Rule 4: The Input Handler
 function love.keypressed(key)
-    if key == "space" and not player.isJumping then
-        player.velocityY = -500 -- Launch upward
-        player.isJumping = true
+    if gameState == "startscreen" then
+        if key == "return" then -- "return" is the Enter key in Love2D
+            gameState = "play"
+        end
+    elseif gameState == "play" then
+        if key == "space" and not player.isJumping then
+            player.velocityY = -500 -- Jumping velocity (negative because the y-axis is inverted in Love2D)
+            player.isJumping = true
+        end
     end
 end
