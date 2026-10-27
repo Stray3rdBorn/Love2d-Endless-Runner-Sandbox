@@ -4,8 +4,8 @@ local player = {
     y = 300,
     velocityY = 0,
     isJumping = false,
-    speed = 200,   -- Pixels per second
-    gravity = 1000 -- Pull force downward
+    speed = 200,  -- Pixels per second
+    gravity = 400 -- Pull force downward
 }
 
 -- Runs once when game starts
@@ -23,7 +23,7 @@ function love.draw()
     love.graphics.rectangle("fill", 0, 320, 800, 280)
 
     -- Draw the player
-    love.graphics.setColor(1, 1, 1) -- White
+    love.graphics.setColor(1, 0, 0) -- Red
     love.graphics.rectangle("fill", player.x, player.y, 20, 20)
 end
 
@@ -53,7 +53,7 @@ function love.keypressed(key)
         print("Spacebar was pressed successfully!")
 
         if not player.isJumping then
-            player.velocityY = -500 -- Launch upward
+            player.velocityY = -400 -- Launch upward
             player.isJumping = true
         end
     end
