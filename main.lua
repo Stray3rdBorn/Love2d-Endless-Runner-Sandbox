@@ -75,18 +75,8 @@ end
 
 -- Rule 4: The Input Handler
 function love.keypressed(key)
-<<<<<<< HEAD
-    if key == "space" then
-        print("Spacebar was pressed successfully!")
-
-        if not player.isJumping then
-            player.velocityY = -500 -- Launch upward
-            player.isJumping = true
-        end
-=======
     if key == "space" and not player.isJumping then
         player.velocityY = -500 -- Launch upward
         player.isJumping = true
->>>>>>> b9cc0cd (Add gradual enemy speed increase)
     end
 end
