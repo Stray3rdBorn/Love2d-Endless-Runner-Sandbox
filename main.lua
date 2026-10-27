@@ -30,19 +30,21 @@ end
 -- Updates the game state
 -- This function runs inside the loop, 60 times a second.
 -- "dt" stands for Delta Time (the exact fraction of a second since the last frame)
-function love.updategame(dt)
-    -- Rule 1: Apply Gravity if the player is in the air
-    if player.y < 300 then
+function love.update(dt)
+    -- Apply gravity to the player if they are in the air
+    if player.isJumping then
         player.velocityY = player.velocityY + (player.gravity * dt)
-    else
-        -- Rule 2: Land on the floor
+    end
+
+    -- Update the player's position based on their velocityY
+    player.y = player.y + (player.velocityY * dt)
+
+    -- Check if the player has landed on the ground
+    if player.y >= 300 then
         player.y = 300
         player.velocityY = 0
         player.isJumping = false
     end
-
-    -- Rule 3: Apply the velocity to the player's position
-    player.y = player.y + (player.velocityY * dt)
 end
 
 -- Rule 4: The Input Handler
