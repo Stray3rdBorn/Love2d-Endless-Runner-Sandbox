@@ -1,4 +1,6 @@
--- (State) define the player object with properties for position, velocity, and state
+local gameState = "gameover"
+
+-- Define the player object with properties for position, velocity, and state
 local player = {
     x = 100,
     y = 290,
@@ -8,7 +10,7 @@ local player = {
     gravity = 1200 -- Pull force downward
 }
 
--- (State) define the player object with properties for position, velocity, and state
+-- Define the enemy object with properties for position, velocity, and state
 local enemy = {
     x = 800,
     y = 290,
@@ -42,6 +44,9 @@ end
 -- This function runs inside the loop, 60 times a second.
 -- "dt" stands for Delta Time (the exact fraction of a second since the last frame)
 function love.update(dt)
+    -- Stop updating positions if the game is over
+    --if gameState == "gameover" then return end
+
     -- Apply gravity to the player if they are in the air
     if player.isJumping then
         player.velocityY = player.velocityY + (player.gravity * dt)
@@ -58,6 +63,7 @@ function love.update(dt)
     end
 
     -- Update the enemy's position based on their velocityX
+    enemy.speed = enemy.speed + (10 * dt) -- Gradually increase the enemy's speed over time
     enemy.velocityX = enemy.speed
     enemy.x = enemy.x - (enemy.velocityX * dt)
 
@@ -69,6 +75,7 @@ end
 
 -- Rule 4: The Input Handler
 function love.keypressed(key)
+<<<<<<< HEAD
     if key == "space" then
         print("Spacebar was pressed successfully!")
 
@@ -76,5 +83,10 @@ function love.keypressed(key)
             player.velocityY = -500 -- Launch upward
             player.isJumping = true
         end
+=======
+    if key == "space" and not player.isJumping then
+        player.velocityY = -500     -- Launch upward
+        player.isJumping = true
+>>>>>>> b9cc0cd (Add gradual enemy speed increase)
     end
 end
