@@ -39,6 +39,9 @@ function love.draw()
         love.graphics.setFont(xlargeFont)
         love.graphics.setColor(0, 1, 0) -- Green Text
         love.graphics.printf("Press ENTER to Start", 0, 250, 800, "center")
+        love.graphics.setFont(mediumFont)
+        love.graphics.setColor(1, 0, 1) -- Magenta Text
+        love.graphics.printf("Movement: Press SPACE to Jump", 0, 310, 800, "center")
         return
     elseif gameState == "play" then
         -- Set the upper portion of the screen to sky blue during gameplay
