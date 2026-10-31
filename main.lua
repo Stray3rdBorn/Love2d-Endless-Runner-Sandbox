@@ -91,6 +91,14 @@ function love.update(dt)
     if enemy.x < -25 then
         enemy.x = 800 -- Teleport back to the right edge
     end
+
+    -- AABB collision check between player and enemy
+    if player.x < enemy.x + 25 and
+        player.x + 25 > enemy.x and
+        player.y < enemy.y + 30 and
+        player.y + 30 > enemy.y then
+        gameState = "gameover"
+    end
 end
 
 -- Rule 4: The Input Handler
