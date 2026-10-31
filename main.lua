@@ -40,7 +40,7 @@ function love.draw()
         love.graphics.setColor(0, 1, 0) -- Green Text
         love.graphics.printf("Press ENTER to Start", 0, 250, 800, "center")
         return
-    elseif gameState == "play" or gameState == "gameover" then
+    elseif gameState == "play" then
         -- Set the upper portion of the screen to sky blue during gameplay
         love.graphics.clear(0.4, 0.6, 0.7)
     end
@@ -122,6 +122,18 @@ function love.keypressed(key)
         if key == "space" and not player.isJumping then
             player.velocityY = -500 -- Jumping velocity (negative because the y-axis is inverted in Love2D)
             player.isJumping = true
+        end
+    elseif gameState == "gameover" then
+        if key == "return" then -- Restart the gameState
+            gameState = "play"
+            -- Reset player and enemy positions
+            player.x = 100
+            player.y = 290
+            player.velocityY = 0
+            player.isJumping = false
+            enemy.x = 800
+            enemy.y = 290
+            enemy.speed = 200 -- Reset enemy speed to initial value
         end
     end
 end
