@@ -9,5 +9,6 @@
 - Enemy speed gradually increases
 - Enemy collision added
 - New game states are added such as Game Over screen
+- Restart button on game over screen
 
 **WORK IN PROGRESS**
