@@ -63,6 +63,9 @@ function love.draw()
         love.graphics.setFont(xlargeFont)
         love.graphics.setColor(1, 0, 0) -- Red Text
         love.graphics.printf("Game Over", 0, 250, 800, "center")
+        love.graphics.setFont(mediumFont)
+        love.graphics.setColor(0, 1, 0) -- Green Text
+        love.graphics.printf("Press ENTER to Restart", 0, 310, 800, "center")
     end
 end
 
