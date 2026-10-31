@@ -7,6 +7,7 @@
 - One blue enemy that infinitely moves left towards the player
 - When enemy leaves the screen, it is teleported back to start
 - Enemy speed gradually increases
-- New game states are being added such as Game Over screen
+- Enemy collision added
+- New game states are added such as Game Over screen
 
 **WORK IN PROGRESS**
