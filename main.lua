@@ -56,6 +56,14 @@ function love.draw()
     -- Draw the enemy
     love.graphics.setColor(0, 0, 1)                           -- Blue
     love.graphics.rectangle("fill", enemy.x, enemy.y, 25, 30) -- Enemy is a 25x30 rectangle
+
+    -- draw the Game Over text
+    if gameState == "gameover" then
+        love.graphics.clear(0, 0, 0)    -- Clear the screen to black
+        love.graphics.setFont(xlargeFont)
+        love.graphics.setColor(1, 0, 0) -- Red Text
+        love.graphics.printf("Game Over", 0, 250, 800, "center")
+    end
 end
 
 -- Updates the game state
