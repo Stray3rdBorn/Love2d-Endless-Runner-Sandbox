@@ -53,7 +53,7 @@ function love.draw()
     if gameState == "play" then
         love.graphics.setFont(mediumFont)
         love.graphics.setColor(1, 1, 0) -- Yellow Text
-        love.graphics.printf("Score: " .. score, 10, 10, 800, "right")
+        love.graphics.printf("Score: " .. score, -20, 10, 800, "right")
     end
 
     -- Draw the floor line
@@ -75,8 +75,11 @@ function love.draw()
         love.graphics.setColor(1, 0, 0) -- Red Text
         love.graphics.printf("Game Over", 0, 250, 800, "center")
         love.graphics.setFont(mediumFont)
+        love.graphics.setColor(1, 1, 0) -- Yellow Text
+        love.graphics.printf("Score: " .. score, 0, 310, 800, "center")
+        love.graphics.setFont(mediumFont)
         love.graphics.setColor(0, 1, 0) -- Green Text
-        love.graphics.printf("Press ENTER to Restart", 0, 310, 800, "center")
+        love.graphics.printf("Press ENTER to Restart", 0, 350, 800, "center")
     end
 end
 
