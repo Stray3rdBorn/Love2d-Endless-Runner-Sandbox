@@ -1,0 +1,54 @@
+name: CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  lua-check:
+    name: Lua Syntax & Basic Checks
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Lua
+        uses: leafo/gh-actions-lua@v4
+        with:
+          luaVersion: "5.4"
+
+      - name: Install luacheck (optional linter)
+        run: |
+          luarocks install luacheck || true
+
+      - name: Check Lua syntax of main.lua
+        run: |
+          # Basic syntax check using the Lua interpreter
+          lua -e "assert(loadfile('main.lua'))" && echo "✓ main.lua has valid Lua syntax"
+
+      - name: Run luacheck if available
+        run: |
+          if command -v luacheck >/dev/null 2>&1; then
+            luacheck main.lua --no-unused --no-redefined || true
+          else
+            echo "luacheck not available – skipping lint"
+          fi
+
+  # Future job example (commented out for now)
+  # package:
+  #   name: Package .love file
+  #   runs-on: ubuntu-latest
+  #   needs: lua-check
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #     - name: Create .love archive
+  #       run: |
+  #         zip -9 -r EndlessJumper.love main.lua
+  #     - name: Upload artifact
+  #       uses: actions/upload-artifact@v4
+  #       with:
+  #         name: EndlessJumper
+  #         path: EndlessJumper.love
