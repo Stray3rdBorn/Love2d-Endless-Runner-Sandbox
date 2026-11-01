@@ -1,5 +1,6 @@
 local gameState = "startscreen"                    -- Initial game state
 local smallFont, mediumFont, largeFont, xlargeFont -- Declare font variables
+local score = 0                                    -- Initialize the score variable
 
 -- Define the player object with properties for position, velocity, and state
 local player = {
@@ -46,6 +47,13 @@ function love.draw()
     elseif gameState == "play" then
         -- Set the upper portion of the screen to sky blue during gameplay
         love.graphics.clear(0.4, 0.6, 0.7)
+        love.graphics.setColor(1, 0, 1) -- Magenta Text
+    end
+
+    if gameState == "play" then
+        love.graphics.setFont(mediumFont)
+        love.graphics.setColor(1, 1, 0) -- Yellow Text
+        love.graphics.printf("Score: " .. score, 10, 10, 800, "right")
     end
 
     -- Draw the floor line
@@ -103,7 +111,8 @@ function love.update(dt)
 
     -- If the enemy completely leaves the left side of the screen
     if enemy.x < -25 then
-        enemy.x = 800 -- Teleport back to the right edge
+        enemy.x = 800     -- Teleport back to the right edge
+        score = score + 1 -- Increment the score
     end
 
     -- AABB collision check between player and enemy
@@ -137,6 +146,7 @@ function love.keypressed(key)
             enemy.x = 800
             enemy.y = 290
             enemy.speed = 200 -- Reset enemy speed to initial value
+            score = 0         -- Reset the score
         end
     end
 end
